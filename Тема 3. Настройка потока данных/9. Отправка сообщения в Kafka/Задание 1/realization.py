@@ -8,9 +8,7 @@ from pyspark.sql.types import StructType, StructField, DoubleType, StringType, T
 TOPIC_NAME_91 = 'student.topic.cohort<номер когорты>.<username>.out'  # Это топик, в который Ваше приложение должно отправлять сообщения. Укажите здесь название Вашего топика student.topic.cohort<номер когорты>.<username>.out
 TOPIC_NAME_IN = 'student.topic.cohort<номер когорты>.<username>' # Это топик, из которого Ваше приложение должно читать сообщения. Укажите здесь название Вашего топика student.topic.cohort<номер когорты>.<username>
 
-# При первом запуске ваш топик student.topic.cohort<номер когорты>.<username>.out может не существовать в Kafka и вы можете увидеть такие сообщения:
-# ERROR: Topic student.topic.cohort<номер когорты>.<username>.out error: Broker: Unknown topic or partition
-# Это сообщение говорит о том, что тест начал проверять работу Вашего приложение, но так как Ваше приложение ещё не отправило туда сообщения, то топик ещё не создан. Нужно подождать несколько минут.
+# submit.py отправляет код в сервис проверок; подключение к вашей Kafka не используется.
 
 def spark_init(test_name) -> SparkSession:
     pass
@@ -50,7 +48,7 @@ def run_query(df):
             .options(**kafka_security_options)
             .option("topic", TOPIC_NAME_91)
             .option("checkpointLocation", "test_query")
-            .trigger(processingTime="15 seconds")
+            .trigger(processingTime="1 minute")
             .start())
 
 
