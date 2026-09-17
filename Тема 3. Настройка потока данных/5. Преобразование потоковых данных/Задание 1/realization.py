@@ -14,12 +14,15 @@ kafka_security_options = {
     'kafka.sasl.jaas.config': 'org.apache.kafka.common.security.scram.ScramLoginModule required username=\"de-student\" password=\"ltcneltyn\";',
 }
 
+# учебное имя входного топика для автоматической проверки
+TOPIC_NAME = 'test-3-5-1'
+
 def spark_init() -> SparkSession:
 		pass
 
 
 def load_df(spark: SparkSession) -> DataFrame:
-		pass # не забудьте здесь указать то-же имя топика что и в TOPIC_NAME 
+		pass # укажите TOPIC_NAME в параметре subscribe
 
 
 def transform(df: DataFrame) -> DataFrame:
